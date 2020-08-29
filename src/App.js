@@ -1,26 +1,40 @@
-import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
+import Second from './Second';
+import React, { useState } from 'react';
 
-function App() {
+function App(props) {
+  const [count, setCount] = useState();
+
+
+
+  function dataclick(){
+       
+      props.data('count');
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Second/>
+  
+
+
+  <button onClick={dataclick}>clickme</button>
     </div>
   );
 }
 
-export default App;
+const sendingdata = (dispatch)=> {
+  return {
+    data:(value)=>{
+      dispatch({type:"typeman", playload:value});
+    }
+  }
+
+}
+
+
+
+export default connect(null, sendingdata)(App);
